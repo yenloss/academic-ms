@@ -25,4 +25,19 @@ public class UniversityService {
     public Optional<University> getById(Integer id) {
         return universityRepository.findById(id);
     }
+
+    @Transactional
+    public University save(UniversityDTO dto) {
+        University university = new University();
+        university.setIdUniversity(dto.getIdUniversity());
+        university.setCode(dto.getCode());
+        university.setName(dto.getName());
+        university.setCampus(dto.getCampus());
+        university.setAddress(dto.getAddress());
+        university.setLogo(dto.getLogo());
+        university.setEmail(dto.getEmail());
+        university.setStatus(dto.getStatus() != null ? dto.getStatus() : true);
+
+        return universityRepository.save(university);
+    }
 }

@@ -1,6 +1,7 @@
 package mx.edu.uteq.idgs12.academic_ms.controller;
 
 import mx.edu.uteq.idgs12.academic_ms.entity.University;
+import mx.edu.uteq.idgs12.academic_ms.dto.UniversityDTO;
 import mx.edu.uteq.idgs12.academic_ms.service.UniversityService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,5 +30,10 @@ public class UniversityController {
         Optional<University> university = universityService.getById(id);
         return university.map(ResponseEntity::ok)
                          .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity<University> create(@RequestBody UniversityDTO dto) {
+        return ResponseEntity.ok(universityService.save(dto));
     }
 }
